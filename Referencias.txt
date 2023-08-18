@@ -1,0 +1,2 @@
+https://ourworldindata.org/explorers/energy?tab=chart&country=USA~GBR~CHN~OWID_WRL~IND~BRA~ZAF&Total+or+Breakdown=Total&Energy+or+Electricity=Primary+energy&Metric=Annual+consumption
+https://data.worldbank.org/indicator/SP.POP.TOTL
