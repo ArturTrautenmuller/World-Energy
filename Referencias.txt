@@ -1,2 +1,5 @@
 https://ourworldindata.org/explorers/energy?tab=chart&country=USA~GBR~CHN~OWID_WRL~IND~BRA~ZAF&Total+or+Breakdown=Total&Energy+or+Electricity=Primary+energy&Metric=Annual+consumption
 https://data.worldbank.org/indicator/SP.POP.TOTL
+https://ourworldindata.org/emissions-by-fuel
+https://www.populationpyramid.net/
+https://datatopics.worldbank.org/world-development-indicators/the-world-by-income-and-region.html#:~:text=The%20World%20Bank%20classifies%20economies,%2Dmiddle%2C%20and%20high%20income.

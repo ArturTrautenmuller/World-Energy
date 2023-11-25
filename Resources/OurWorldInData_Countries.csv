@@ -1,0 +1,219 @@
+id,name,code
+15,Afghanistan,AFG
+16,Albania,ALB
+17,Algeria,DZA
+246,American Samoa,ASM
+19,Angola,AGO
+346,Antarctica,ATA
+20,Antigua and Barbuda,ATG
+21,Argentina,ARG
+22,Armenia,ARM
+219,Aruba,ABW
+23,Australia,AUS
+24,Austria,AUT
+25,Azerbaijan,AZE
+26,Bahamas,BHS
+27,Bahrain,BHR
+28,Bangladesh,BGD
+29,Barbados,BRB
+30,Belarus,BLR
+4,Belgium,BEL
+31,Belize,BLZ
+32,Benin,BEN
+194,Bermuda,BMU
+33,Bhutan,BTN
+34,Bolivia,BOL
+35,Bosnia and Herzegovina,BIH
+36,Botswana,BWA
+37,Brazil,BRA
+196,British Virgin Islands,VGB
+38,Brunei,BRN
+39,Bulgaria,BGR
+40,Burkina Faso,BFA
+41,Burundi,BDI
+42,Cambodia,KHM
+43,Cameroon,CMR
+44,Canada,CAN
+45,Cape Verde,CPV
+197,Cayman Islands,CYM
+174,Central African Republic,CAF
+173,Chad,TCD
+172,Chile,CHL
+171,China,CHN
+170,Colombia,COL
+169,Comoros,COM
+168,Congo,COG
+199,Cook Islands,COK
+166,Costa Rica,CRI
+143,Cote d'Ivoire,CIV
+165,Croatia,HRV
+164,Cuba,CUB
+163,Cyprus,CYP
+162,Czechia,CZE
+167,Democratic Republic of Congo,COD
+161,Denmark,DNK
+154,Djibouti,DJI
+200,Dominica,DMA
+160,Dominican Republic,DOM
+225,East Timor,TLS
+201,Ecuador,ECU
+65,Egypt,EGY
+259,El Salvador,SLV
+159,Equatorial Guinea,GNQ
+157,Eritrea,ERI
+156,Estonia,EST
+78,Eswatini,SWZ
+158,Ethiopia,ETH
+249,Falkland Islands,FLK
+250,Faroe Islands,FRO
+202,Fiji,FJI
+155,Finland,FIN
+3,France,FRA
+253,French Guiana,GUF
+203,French Polynesia,PYF
+153,Gabon,GAB
+151,Gambia,GMB
+152,Georgia,GEO
+6,Germany,DEU
+150,Ghana,GHA
+149,Greece,GRC
+205,Greenland,GRL
+206,Grenada,GRD
+252,Guadeloupe,GLP
+254,Guam,GUM
+148,Guatemala,GTM
+147,Guinea,GIN
+94,Guinea-Bissau,GNB
+146,Guyana,GUY
+145,Haiti,HTI
+139,Honduras,HND
+144,Hong Kong,HKG
+138,Hungary,HUN
+207,Iceland,ISL
+137,India,IND
+136,Indonesia,IDN
+135,Iran,IRN
+134,Iraq,IRQ
+2,Ireland,IRL
+133,Israel,ISR
+8,Italy,ITA
+132,Jamaica,JAM
+14,Japan,JPN
+130,Jordan,JOR
+131,Kazakhstan,KAZ
+129,Kenya,KEN
+204,Kiribati,KIR
+208,Kuwait,KWT
+126,Kyrgyzstan,KGZ
+125,Laos,LAO
+122,Latvia,LVA
+124,Lebanon,LBN
+123,Lesotho,LSO
+121,Liberia,LBR
+120,Libya,LBY
+119,Lithuania,LTU
+210,Luxembourg,LUX
+262,Macao,MAC
+118,Madagascar,MDG
+117,Malawi,MWI
+116,Malaysia,MYS
+211,Maldives,MDV
+115,Mali,MLI
+212,Malta,MLT
+284,Martinique,MTQ
+114,Mauritania,MRT
+213,Mauritius,MUS
+113,Mexico,MEX
+222,Micronesia (country),FSM
+111,Moldova,MDA
+112,Mongolia,MNG
+215,Montenegro,MNE
+216,Montserrat,MSR
+110,Morocco,MAR
+109,Mozambique,MOZ
+142,Myanmar,MMR
+108,Namibia,NAM
+218,Nauru,NRU
+107,Nepal,NPL
+5,Netherlands,NLD
+362,Netherlands Antilles,ANT
+220,New Caledonia,NCL
+106,New Zealand,NZL
+105,Nicaragua,NIC
+104,Niger,NER
+103,Nigeria,NGA
+261,Niue,NIU
+128,North Korea,PRK
+66,North Macedonia,MKD
+266,Northern Mariana Islands,MNP
+102,Norway,NOR
+217,Oman,OMN
+101,Pakistan,PAK
+140,Palestine,PSE
+100,Panama,PAN
+99,Papua New Guinea,PNG
+98,Paraguay,PRY
+97,Peru,PER
+96,Philippines,PHL
+11,Poland,POL
+95,Portugal,PRT
+93,Puerto Rico,PRI
+226,Qatar,QAT
+245,Reunion,REU
+92,Romania,ROU
+12,Russia,RUS
+91,Rwanda,RWA
+260,Saint Helena,SHN
+227,Saint Kitts and Nevis,KNA
+229,Saint Lucia,LCA
+353,Saint Pierre and Miquelon,SPM
+230,Saint Vincent and the Grenadines,VCT
+239,Samoa,WSM
+232,Sao Tome and Principe,STP
+90,Saudi Arabia,SAU
+89,Senegal,SEN
+88,Serbia,SRB
+233,Seychelles,SYC
+87,Sierra Leone,SLE
+86,Singapore,SGP
+85,Slovakia,SVK
+83,Slovenia,SVN
+195,Solomon Islands,SLB
+82,Somalia,SOM
+81,South Africa,ZAF
+127,South Korea,KOR
+258,South Sudan,SSD
+9,Spain,ESP
+141,Sri Lanka,LKA
+79,Sudan,SDN
+234,Suriname,SUR
+10,Sweden,SWE
+7,Switzerland,CHE
+77,Syria,SYR
+198,Taiwan,TWN
+76,Tajikistan,TJK
+64,Tanzania,TZA
+75,Thailand,THA
+74,Togo,TGO
+235,Tonga,TON
+73,Trinidad and Tobago,TTO
+71,Tunisia,TUN
+70,Turkey,TUR
+69,Turkmenistan,TKM
+236,Turks and Caicos Islands,TCA
+237,Tuvalu,TUV
+68,Uganda,UGA
+67,Ukraine,UKR
+72,United Arab Emirates,ARE
+1,United Kingdom,GBR
+13,United States,USA
+256,United States Virgin Islands,VIR
+63,Uruguay,URY
+62,Uzbekistan,UZB
+221,Vanuatu,VUT
+238,Venezuela,VEN
+84,Vietnam,VNM
+248,Western Sahara,ESH
+61,Yemen,YEM
+60,Zambia,ZMB
+80,Zimbabwe,ZWE
