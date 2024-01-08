@@ -121,7 +121,7 @@ def TransformEletricity():
 
 
 
-    Renewables = pd.read_csv(variables.ExtractPath + '\\Source\\Primary\\Renewables.csv')
+    Renewables = pd.read_csv(variables.ExtractPath + '\\Source\\Eletricity\\Renewables.csv')
     Renewables.rename(columns={'values': 'Renewables'}, inplace=True)
     Renewables.drop('fonte', axis=1, inplace=True)
     Solar.rename(columns={'values': 'Solar'}, inplace=True)
@@ -175,6 +175,25 @@ def TransformEletricity():
     print(Eletricity)
     Eletricity.to_csv(variables.TransformPath + '\\EletricityFato.csv', index=False)
 
+def Population():
+    Population = pd.read_csv(variables.ExtractPath + '\\Population\\Population.csv')
+    Population.drop('Country Name', axis=1, inplace=True)
+    Population.drop('Indicator Name', axis=1, inplace=True)
+    Population.drop('Indicator Code', axis=1, inplace=True)
+    Population = pd.melt(Population, id_vars=['Country Code'], var_name='Year', value_name='Population')
+    Population.rename(columns={'Country Code': 'Code'}, inplace=True)
+    Population['Population'] = np.where(Population['Population'].isnull(), 0, Population['Population'])
+    Population = Population[Population['Year'] != 'Unnamed: 65']
+
+    # Population.to_csv(variables.TransformPath+'\\Population.csv',index=False)
+    countries_df = pd.read_csv(variables.ResourcesPath + '\\Countries.csv')
+    countries_df.rename(columns={'Cod.A3': 'Code'}, inplace=True)
+    countries_df.drop('Cod.A2', axis=1, inplace=True)
+    countries_df.drop('Cod', axis=1, inplace=True)
+    Population = pd.merge(Population, countries_df, how='inner', on=['Code'])
+
+    Population['Year'] = Population['Year'].astype(int)
+    Population.to_csv(variables.TransformPath + '\\Population.csv', index=False)
 
 
 def Geral():
@@ -189,7 +208,7 @@ def Geral():
     Fato = pd.merge(PrimaryFato, EletricityFato, how='outer', on=['Year','Source','Classification','Entity','Code'])
     Fato['Consumption'] = np.where(Fato['Consumption'].isnull(), 0, Fato['Consumption'])
     Fato['Consumption_Eletricity'] = np.where(Fato['Consumption_Eletricity'].isnull(), 0, Fato['Consumption_Eletricity'])
-    print(Fato)
+
 
     Fato.to_csv(variables.TransformPath + '\\Fato.csv', index=False)
 
@@ -211,11 +230,11 @@ def CO2_EMISSION():
     CO2 = pd.merge(CO2, CountriesOWD, how='left', on=['CodeNumeric'])
 
     CO2 = CO2.dropna(subset=['Code'])
-
+    CO2['CO2 Emission'] = CO2['CO2 Emission'].astype(float)
     CO2.to_csv(variables.TransformPath + '\\CO2 Emission.csv', index=False)
     
     
-
+Population()
 TransformPrimary()
 TransformEletricity()
 Geral()

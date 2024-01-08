@@ -61,10 +61,9 @@ def TransformEletricity():
     Eletricity['Wind'] = np.where(Eletricity['Wind'].isnull(), 0, Eletricity['Wind'])
     Eletricity['Wind'] = Eletricity['Wind'].astype(float)
 
-    Eletricity['Other Renewables'] = Eletricity['Renewables'] - Eletricity['Solar'] - Eletricity['Wind'] - Eletricity[
-        'Hydro']
+    Eletricity['Other Renewables'] = Eletricity['Renewables'] - Eletricity['Solar'] - Eletricity['Wind'] - Eletricity['Hydro']
     Eletricity.drop('Renewables', axis=1, inplace=True)
-    Eletricity = Eletricity.query('Code != "Regional" & Code != "OWID_WRL" & Year < 2022')
+    Eletricity = Eletricity.query('Code != "Regional" & Code != "OWID_WRL" & Year < 2023')
 
     #fix counrty name
     Countries = pd.read_csv(variables.ResourcesPath + '\\CountryMap.csv')
