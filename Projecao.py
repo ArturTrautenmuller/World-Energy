@@ -63,7 +63,7 @@ def ConsumoPerCapita():
     print(CrescimentoMedio)
 
 
-def IntensidadeEnergetica():
+def FatordeAjuste():
     ConsumoTotal = pd.read_csv(variables.ProjecaoPath + '\\ConsumoTotal.csv')
     ConsumoTotal.drop('Population', axis=1, inplace=True)
     ConsumoTotal.drop('PerCapitaConsumption', axis=1, inplace=True)
@@ -112,12 +112,13 @@ def IntensidadeEnergetica():
     print(CoeficienteAjuste)
 
 
-def FatordeAjuste():
+def CrescimentoLimite():
     HIC = pd.read_excel(variables.ResourcesPath+'\\World Bank Countries Groups.xlsx',engine='openpyxl')
     HIC.drop('Economy', axis=1, inplace=True)
     HIC.drop('Region', axis=1, inplace=True)
     HIC.drop('Lending category', axis=1, inplace=True)
     HIC.drop('Unnamed: 5', axis=1, inplace=True)
+    DC = HIC[HIC['Income group'] != "High income"]
     HIC = HIC[HIC['Income group'] == "High income"]
 
     HIC_Media10A = pd.read_csv(variables.ProjecaoPath + '\\Media10A.csv')
@@ -126,11 +127,26 @@ def FatordeAjuste():
 
     HIC_Media10A_Total = HIC_Media10A['AvgLast10yrs'].mean()
 
+    CoeficienteAjuste = pd.read_csv(variables.ProjecaoPath + '\\CoeficienteAjuste.csv')
+    CoeficienteAjuste.drop('AvgLast10yrs', axis=1, inplace=True)
+    CoeficienteAjuste.drop('GlobalAvg', axis=1, inplace=True)
+    CoeficienteAjuste = pd.merge(CoeficienteAjuste, DC, how='inner', on=['Code'])
+    CoeficienteAjuste.drop('Income group', axis=1, inplace=True)
+    CoeficienteAjuste['HIC_AvgLast10yrs'] = HIC_Media10A['AvgLast10yrs'].mean()
+    CoeficienteAjuste['HIC_AvgLast10yrs'] = CoeficienteAjuste['HIC_AvgLast10yrs'].astype(float)
+    CoeficienteAjuste['MaxGrowth'] = CoeficienteAjuste['HIC_AvgLast10yrs']*CoeficienteAjuste['CoeficienteAjuste']
+    CoeficienteAjuste['MaxGrowth'] = CoeficienteAjuste['MaxGrowth'].astype(float)
+    CoeficienteAjuste.drop('CoeficienteAjuste', axis=1, inplace=True)
+    CoeficienteAjuste.drop('HIC_AvgLast10yrs', axis=1, inplace=True)
 
+    HIC_Media10A.drop('Income group', axis=1, inplace=True)
+    HIC_Media10A.rename(columns={'AvgLast10yrs': 'MaxGrowth'}, inplace=True)
 
+    CrescimentoLimite = pd.concat([HIC_Media10A,CoeficienteAjuste])
+    CrescimentoLimite.to_csv(variables.ProjecaoPath + '\\CrescimentoLimite.csv', index=False)
 
-    print(HIC_Media10A_Total)
+    print(CrescimentoLimite)
 
 #ConsumoPerCapita()
 #FatordeAjuste()
-IntensidadeEnergetica()
+CrescimentoLimite()
