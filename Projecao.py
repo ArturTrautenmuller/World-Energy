@@ -62,6 +62,56 @@ def ConsumoPerCapita():
     CrescimentoMedio.to_csv(variables.ProjecaoPath + '\\CrescimentoMedio.csv', index=False)
     print(CrescimentoMedio)
 
+
+def IntensidadeEnergetica():
+    ConsumoTotal = pd.read_csv(variables.ProjecaoPath + '\\ConsumoTotal.csv')
+    ConsumoTotal.drop('Population', axis=1, inplace=True)
+    ConsumoTotal.drop('PerCapitaConsumption', axis=1, inplace=True)
+
+    GDP = pd.read_csv(variables.TransformPath + '\\GDP.csv')
+    GDP.drop('Multiplier', axis=1, inplace=True)
+    GDP.drop('GDP 2022 (2017 USD PPP)', axis=1, inplace=True)
+    GDP.drop('GDP 2022 (2015 USD PPP)', axis=1, inplace=True)
+
+    IntensidadeEnergetica = pd.merge(ConsumoTotal, GDP, how='inner', on=['Code','Year'])
+    IntensidadeEnergetica['ConsumptionTotal'] = IntensidadeEnergetica['ConsumptionTotal'].astype(float)
+    IntensidadeEnergetica['GDP 2015 PPP'] = IntensidadeEnergetica['GDP 2015 PPP'].astype(float)
+    IntensidadeEnergetica['ConsumptionTotal'] = np.where(IntensidadeEnergetica['ConsumptionTotal'].isnull(), 0, IntensidadeEnergetica['ConsumptionTotal'])
+    IntensidadeEnergetica['GDP 2015 PPP'] = np.where(IntensidadeEnergetica['GDP 2015 PPP'].isnull(), 0, IntensidadeEnergetica['GDP 2015 PPP'])
+    IntensidadeEnergetica = IntensidadeEnergetica[IntensidadeEnergetica['GDP 2015 PPP'] > 0]
+
+    IntensidadeEnergetica['IntensidadeEnergetica'] = (IntensidadeEnergetica['ConsumptionTotal']/IntensidadeEnergetica['GDP 2015 PPP'])*1000000000
+
+    IntensidadeEnergetica['IntensidadeEnergetica'] = np.where(IntensidadeEnergetica['IntensidadeEnergetica'].isnull(), 0,IntensidadeEnergetica['IntensidadeEnergetica'])
+    IntensidadeEnergetica['IntensidadeEnergetica'] = IntensidadeEnergetica['IntensidadeEnergetica'].astype(float)
+    IntensidadeEnergetica = IntensidadeEnergetica[IntensidadeEnergetica['IntensidadeEnergetica'] > 0]
+
+    ultimo_ano = ConsumoTotal.groupby('Code')['Year'].max()
+
+    CoeficienteAjuste = (
+        IntensidadeEnergetica
+            .merge(ultimo_ano, on=['Code', 'Year'], how='inner')
+            .assign(Rank=lambda x: x.groupby('Code').cumcount())
+            .query('Rank < 10')
+            .groupby('Code')['IntensidadeEnergetica']
+            .mean()
+            .reset_index()
+            .rename(columns={'IntensidadeEnergetica': 'AvgLast10yrs'})
+    )
+
+    CoeficienteAjuste['AvgLast10yrs'] = CoeficienteAjuste['AvgLast10yrs'].astype(float)
+    CoeficienteAjuste['GlobalAvg'] = CoeficienteAjuste['AvgLast10yrs'].mean()
+    CoeficienteAjuste['GlobalAvg'] = CoeficienteAjuste['GlobalAvg'].astype(float)
+    CoeficienteAjuste['CoeficienteAjuste'] = CoeficienteAjuste['AvgLast10yrs']/CoeficienteAjuste['GlobalAvg']
+    CoeficienteAjuste['CoeficienteAjuste'] = CoeficienteAjuste['CoeficienteAjuste'].astype(float)
+
+
+    IntensidadeEnergetica.to_csv(variables.ProjecaoPath + '\\IntensidadeEnergetica.csv', index=False)
+    CoeficienteAjuste.to_csv(variables.ProjecaoPath + '\\CoeficienteAjuste.csv', index=False)
+
+    print(CoeficienteAjuste)
+
+
 def FatordeAjuste():
     HIC = pd.read_excel(variables.ResourcesPath+'\\World Bank Countries Groups.xlsx',engine='openpyxl')
     HIC.drop('Economy', axis=1, inplace=True)
@@ -71,8 +121,16 @@ def FatordeAjuste():
     HIC = HIC[HIC['Income group'] == "High income"]
 
     HIC_Media10A = pd.read_csv(variables.ProjecaoPath + '\\Media10A.csv')
+    HIC_Media10A = pd.merge(HIC_Media10A, HIC, how='inner', on=['Code'])
+    HIC_Media10A = HIC_Media10A[HIC_Media10A['AvgLast10yrs'] > 0]
 
-    print(HIC)
+    HIC_Media10A_Total = HIC_Media10A['AvgLast10yrs'].mean()
+
+
+
+
+    print(HIC_Media10A_Total)
 
 #ConsumoPerCapita()
-FatordeAjuste()
+#FatordeAjuste()
+IntensidadeEnergetica()
