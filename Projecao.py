@@ -267,8 +267,30 @@ def ProjecaoPerCapita():
 
     ProjecaoPerCapitaFinal.to_csv(variables.ProjecaoPath + '\\ProjecaoPerCapita.csv', index=False)
 
+
+def ProjecaoConsumo():
+    ProjecaoPerCapita = pd.read_csv(variables.ProjecaoPath + '\\ProjecaoPerCapita.csv')
+    Population = pd.read_csv(variables.ProjecaoPath + '\\PopulationForecast.csv')
+    Population['Population'] = np.where(Population['Population'].isnull(), 0, Population['Population'])
+    Population['Population'] = Population['Population'].astype(float)
+    Population['Population'] = Population['Population'] * 1000
+    Population['Population'] = Population['Population'].astype(float)
+    Population = Population[Population['Population'] > 0]
+    Population = Population[Population['Year'] >= 2023]
+
+    ProjecaoConsumo = pd.merge(ProjecaoPerCapita, Population, how='inner', on=['Code','Year'])
+    ProjecaoConsumo['Population'] = ProjecaoConsumo['Population'].astype(float)
+    ProjecaoConsumo['PerCapitaConsumptionForecast'] = ProjecaoConsumo['PerCapitaConsumptionForecast'].astype(float)
+    ProjecaoConsumo['ConsumptionForecast'] = (ProjecaoConsumo['PerCapitaConsumptionForecast']*ProjecaoConsumo['Population'])/1000000
+
+    ProjecaoConsumo.to_csv(variables.ProjecaoPath + '\\ProjecaoConsumo.csv', index=False)
+
+    print(ProjecaoConsumo)
+
+
 #ProjecaoPopulacao()
 #ConsumoPerCapita()
 #FatordeAjuste()
 #CrescimentoLimite()
-ProjecaoPerCapita()
+#ProjecaoPerCapita()
+ProjecaoConsumo()
