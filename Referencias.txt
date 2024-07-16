@@ -4,3 +4,15 @@ https://ourworldindata.org/emissions-by-fuel
 https://www.populationpyramid.net/
 https://datatopics.worldbank.org/world-development-indicators/the-world-by-income-and-region.html#:~:text=The%20World%20Bank%20classifies%20economies,%2Dmiddle%2C%20and%20high%20income.
 https://www.worlddata.info/countrycodes.php
+
+
+
+British Petroleum. (2020). BP Statistical Review of World Energy 2020.
+Chen, H., Chiang, R. H. L., & Storey, V. C. (2012). Business Intelligence and Analytics: From Big Data to Big Impact. MIS Quarterly, 36(4), 1165-1188.
+Few, S. (2012). Show Me the Numbers: Designing Tables and Graphs to Enlighten. Analytics Press.
+International Energy Agency. (2020). World Energy Balances 2020.
+Kimball, R., & Ross, M. (2013). The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling. Wiley.
+McKinney, W. (2012). Python for Data Analysis: Data Wrangling with Pandas, NumPy, and IPython. O'Reilly Media.
+Microsoft. (2020). Power BI Documentation.
+Sherman, R. (2014). Business Intelligence Guidebook: From Data Integration to Analytics. Morgan Kaufmann.
+Turban, E., Sharda, R., Delen, D., & King, D. (2011). Business Intelligence: A Managerial Approach. Pearson.

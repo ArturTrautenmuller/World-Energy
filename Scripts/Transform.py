@@ -232,6 +232,55 @@ def CO2_EMISSION():
     CO2 = CO2.dropna(subset=['Code'])
     CO2['CO2 Emission'] = CO2['CO2 Emission'].astype(float)
     CO2.to_csv(variables.TransformPath + '\\CO2 Emission.csv', index=False)
+
+
+def Economia():
+    GDP = pd.read_excel(variables.ExtractPath+'\\Economia\\GDP PPP 2015 Constant.xlsx',engine='openpyxl')
+    GDP.drop('Series Name', axis=1, inplace=True)
+    GDP.drop('Country Name', axis=1, inplace=True)
+    GDP.drop('Series Code', axis=1, inplace=True)
+
+    GDP.rename(columns={'Country Code': 'Code'}, inplace=True)
+
+    GDP2015 = GDP[['Code','2022 [YR2022]']].copy()
+    GDP2015.rename(columns={'2022 [YR2022]': 'GDP 2022 (2015 USD PPP)'}, inplace=True)
+
+    GDP2015['GDP 2022 (2015 USD PPP)'] = GDP2015['GDP 2022 (2015 USD PPP)'].replace('..',0)
+    GDP2015['GDP 2022 (2015 USD PPP)'] = GDP2015['GDP 2022 (2015 USD PPP)'].astype(float)
+
+
+
+    GDP = GDP.melt(id_vars=["Code"],var_name="Year",value_name="GDP 2015 PPP")
+    GDP['GDP 2015 PPP'] = np.where(GDP['GDP 2015 PPP'].isnull(), 0, GDP['GDP 2015 PPP'])
+    GDP['GDP 2015 PPP'] = GDP['GDP 2015 PPP'].replace('..',0)
+    GDP['GDP 2015 PPP'] = GDP['GDP 2015 PPP'].astype(float)
+    GDP[['Year','Year1']] = GDP['Year'].str.split(' ',expand=True)
+    GDP.drop('Year1', axis=1, inplace=True)
+
+    GDP = pd.merge(GDP, GDP2015, how='left', on=['Code'])
+
+    GDP2017 = pd.read_excel(variables.ExtractPath + '\\Economia\\GDP PPP 2017 Constant.xlsx', engine='openpyxl')
+    GDP2017.drop('Series Name', axis=1, inplace=True)
+    GDP2017.drop('Country Name', axis=1, inplace=True)
+    GDP2017.drop('Series Code', axis=1, inplace=True)
+
+    GDP2017.rename(columns={'Country Code': 'Code'}, inplace=True)
+    GDP2017.rename(columns={'2022 [YR2022]': 'GDP 2022 (2017 USD PPP)'}, inplace=True)
+
+    GDP2017['GDP 2022 (2017 USD PPP)'] = GDP2017['GDP 2022 (2017 USD PPP)'].replace('..',0)
+    GDP2017['GDP 2022 (2017 USD PPP)'] = GDP2017['GDP 2022 (2017 USD PPP)'].astype(float)
+
+    GDP = pd.merge(GDP, GDP2017, how='left', on=['Code'])
+    GDP = GDP[GDP['GDP 2022 (2017 USD PPP)'] > 0]
+    GDP = GDP[GDP['GDP 2022 (2015 USD PPP)'] > 0]
+    GDP['Multiplier'] = GDP['GDP 2022 (2017 USD PPP)']/GDP['GDP 2022 (2015 USD PPP)']
+    GDP['GDP 2015 PPP'] = GDP['GDP 2015 PPP']*GDP['Multiplier']
+
+    GDP.to_csv(variables.TransformPath + '\\GDP.csv', index=False)
+
+
+    print(GDP)
+
     
     
 Population()
@@ -239,3 +288,4 @@ TransformPrimary()
 TransformEletricity()
 Geral()
 CO2_EMISSION()
+Economia()

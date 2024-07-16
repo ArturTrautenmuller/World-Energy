@@ -1,0 +1,6 @@
+media (c) ultimos 10 anos HIC
+coeficiente de ajuste - media (kWh/USD)
+coeficiente angular - media ultimos 10 anos 
+gerar projecção (c)
+gerar projeção (C)
+projecao por fonte
